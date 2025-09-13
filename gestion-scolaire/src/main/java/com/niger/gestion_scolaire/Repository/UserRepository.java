@@ -10,10 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository <User, Long>{
-
     Optional<User> findByNomUtilisateur(String nomUtilisateur);
     List<User> findByTypeUtilisateur(TypeUtilisateur typeUtilisateur);
     List<User> findByActifTrue();
-
 
 }

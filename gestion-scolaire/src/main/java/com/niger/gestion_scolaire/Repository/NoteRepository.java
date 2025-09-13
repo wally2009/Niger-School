@@ -5,6 +5,8 @@ import com.niger.gestion_scolaire.Entites.Matiere;
 import com.niger.gestion_scolaire.Entites.Note;
 import com.niger.gestion_scolaire.Entites.TypeEvaluation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,4 +16,8 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     List<Note> findByEleveAndMatiere(Eleve eleve, Matiere matiere);
     List<Note> findByTypeEvaluation(TypeEvaluation evaluation);
     List<Note> findByDateEvaluationBetween(LocalDate debut, LocalDate fin);
+
+    @Query("SELECT n FROM Note n WHERE n.eleve.classe.id = :classeId")
+    List<Note> findByClasseId(@Param("classeId") Long classeId);
+
 }
